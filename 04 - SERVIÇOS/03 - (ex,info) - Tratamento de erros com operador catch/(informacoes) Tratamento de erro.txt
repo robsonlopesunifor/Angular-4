@@ -1,0 +1,47 @@
+
+OPERADOR CATCH
+
+Depois de um erro o observador para de mandar eventos.
+O metodo catch recebe o objeto do erro, e o trata.
+Devouvendo um outro observable. 
+
+//-----------------------../../restaurants.serice.ts---------------------
+
+// .catch() vai usar class ErrorHandler pra tratar os erros 
+
+export class RestourantsService {
+
+	constructor(private http: Http){}
+
+  	restourants():Observable<Restourant[]> {
+    	return this.http.get(`${MEAT_API}/restaurants1`)  // vamos passar uma url que nao existe 
+							  // gerando um erro 404 
+        	.map(response => response.json())
+        	.catch(ErrorHandler.handleError)	  // depois passamos o atributo estático
+							  // do handleError 
+  }
+}
+
+------------------------- app.error-hendler.ts--------------------
+
+// classe que vai tratar os erros 
+
+export class ErrorHandler {
+
+	static handleError(error: Response | any){	// retorna um objeto do tipo reponse
+							// nele tras o estatos erro e a url 
+    		let errorMessage: string
+
+    		if(error instanceof Response){		// se meu erro for do tipo response 
+      			errorMessage = `Erro ${error.status} ao acessor a URL ${error.url} - ${error.statusText}`
+    		}else{					// se for um tipo desconhecido so mostra o erro 
+      			errorMessage = error.toString()
+    		}
+
+    	console.log(errorMessage)
+    	return Observable.throw(errorMessage)           // assim que alguem tentar ler a 
+         						// mensagem do observable ele vai
+         						// ler essa mensagem 
+  	}
+}
+

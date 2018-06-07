@@ -1,0 +1,32 @@
+import { Injectable } from '@angular/core'		//   caso queira adicionar um serviço a 
+							//    outro serviço
+import { Http } from "@angular/http";			// serviço que pretendemos injetar 
+
+import {Observable} from 'rxjs/Observable'		// permite usar objeto observable 
+import 'rxjs/add/operator/map'				// importa o operador map 
+							// tratamento de erro
+           
+import { Restourant } from "app/restourants/restourant/restourants.model";
+
+import {MEAT_API} from '../app.api'
+
+
+@Injectable()						// diz que esse serviço vai receber outro serviço 
+export class RestourantsService {
+
+  constructor(private http: Http){}   			// injeção de dependência 
+
+  restourants():Observable<Restourant[]> {		// 
+    return this.http.get(`${MEAT_API}/restaurants`)    	// o http retorna um objeto do tipo 
+							// observable logo voce precisa definir 
+							// que ele nao vai retorna um arei do tipo 
+							// Restourant 
+							// Para isso voce de usar 
+							// Observable<  >
+        .map(response => response.json())		// nos precisamos maper porque ele 
+							// retorna a resposta crua, um objeto 
+							// response e mapea para json
+  }
+}
+
+

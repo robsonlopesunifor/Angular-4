@@ -1,0 +1,22 @@
+// <mt-menu> vai receber os $eventos do <mt-menu-item> e vai executar algum metodo 
+// no caso adicionar ao carrinho 
+
+<!--INÍCIO DO MENU -->
+<div class="col-md-9 col-xs-12">
+
+    <mt-menu-item *ngFor="let item of menu | async" // async vai se inscrever no menu.
+
+    	[menuItem]="item" 			  // Atributo do componet menu-item
+						  // @Input() menuItem: MenuItem
+
+	(add)="shoppingCart.addItem($event)" 	// Recebe um eventos emitidos pelos menu-item
+						// Enviado pelo metodo emitAddEvent, 
+						// E emitido ao clicar no 'adicionar'
+	(add)="addMenuItem($event)"	      // mostra os dados $event no console
+	></mt-menu-item>
+</div>
+
+<div class="col-md-3 col-xs-12">
+  <mt-shopping-cart #shoppingCart></mt-shopping-cart>
+</div>
+<!-- FIM DO MENU -->

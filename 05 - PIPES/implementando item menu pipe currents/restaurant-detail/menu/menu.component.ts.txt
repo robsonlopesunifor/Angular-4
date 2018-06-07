@@ -1,0 +1,38 @@
+// Vai pegar o id da url (restourants/(id)bread-bakery/menu)
+// passa para menuOfRestaurant, retornar menuItem[] 
+// menuItem[] vai povoar o menu.component.html
+
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router'
+import { RestourantsService } from '../../restourants/restaurants.service'
+import { Observable } from 'rxjs/Observable'
+import { MenuItem } from "app/restaurant-detail/menu-item/menu-item.model";
+
+@Component({
+  selector: 'mt-menu',
+  templateUrl: './menu.component.html'
+})
+export class MenuComponent implements OnInit {
+
+  menu: Observable<MenuItem[]>		// esse array vai ser interado pelo *ngFor no HTML
+					// e vai povoar o menu.component.html
+
+  constructor(private restaurantsService: RestourantsService,   // injeta os serviços do restalrantes
+              private route: ActivatedRoute) { }                // ActivatedRoute para tirar a foto da rota
+
+  ngOnInit() {
+    this.menu = this.restaurantsService
+    .menuOfRestaurant(this.route.parent.snapshot.params['id']) 	
+						// menuOfRestaurant recebe o id, e retorna menuItem[].
+						// O id e pego com componete pai.
+						// (pai)restourants/(id-pai)bread-bakery/(filho)menu
+						
+  }
+
+  addMenuItem(item: MenuItem){		//
+    console.log(item)
+  }
+
+}
+
+

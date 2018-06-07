@@ -1,0 +1,44 @@
+DATA BINDING
+		
+Two-way data binding: componente para template e vice-versa. (data binding + event binding)
+
+
+	[(ngModel)]="variável"
+
+EX:
+------------------------------------------------------ 
+	app.component.ts >> 
+
+
+	private palestrante: Object = {nome: 'Flávio', email: 'N/A'};
+ 
+  	public grava():void {
+    		// envia os dados do palestrante para uma API
+    		this.palestrante = {}; // limpa o formulário
+  	} 
+
+------------------------------------------------------ Two-way data binding
+
+	<form ng-submit="grava()">
+  		<input	[(ngModel)]="palestrante.nome"
+    			placeholder="Nome">
+ 
+  		<input	[(ngModel)]="palestrante.email"
+    			placeholder="E-mail">
+ 
+  		<button type="submit">Gravar</button>
+	</form>	 
+
+------------------------------------------------------ (data binding + event binding)
+
+	<form ng-submit="grava()">
+  		<input	(input)="palestrante.nome = $event.target.value" 
+    			[value]="palestrante.nome" 
+    			placeholder="Nome">
+ 
+  		<input	(input)="palestrante.email = $event.target.value" 
+    			[value]="palestrante.email" 
+    			placeholder="E-mail">
+ 
+  		<button type="submit">Gravar</button>
+	</form>

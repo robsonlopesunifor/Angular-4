@@ -1,0 +1,32 @@
+import { Injectable } from '@angular/core'
+import { Http } from "@angular/http";
+
+import {Observable} from 'rxjs/Observable'
+import 'rxjs/add/operator/map'
+							// tratamento de erro
+import 'rxjs/add/operator/catch'			// importa o operador catch 
+
+import { Restourant } from "app/restourants/restourant/restourants.model";
+
+import {MEAT_API} from '../app.api'
+							// tratamento de erro
+import {ErrorHandler} from '../app.error-handler'   	// importa o tratamento de erro que criamos 
+
+@Injectable()
+export class RestourantsService {
+
+  constructor(private http: Http){}
+
+  restourants():Observable<Restourant[]> {
+    return this.http.get(`${MEAT_API}/restaurants1`)  	// vamos passar uma url que nao existe 
+							// gerando um erro 404 
+        .map(response => response.json())
+        .catch(ErrorHandler.handleError)		// depois passamos o atributo estático
+							// do handleError 
+  }
+}
+
+// o erro irá aparecer no console 
+
+
+

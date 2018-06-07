@@ -1,0 +1,1 @@
+Vai identificar caso a url do servidor nao exista 

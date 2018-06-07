@@ -1,0 +1,29 @@
+// subscrib sera feito pelo pipe async
+
+import { Component, OnInit } from '@angular/core';
+
+// importaçoes necessarias
+import { ActivatedRoute } from '@angular/router'
+import { RestourantsService } from '../../restourants/restaurants.service'
+import { Observable } from 'rxjs/Observable'
+
+@Component({
+  	selector: 'mt-reviews',
+  	templateUrl: './reviews.component.html'
+})
+export class ReviewsComponent implements OnInit {
+
+  	reviews: Observable<any>   // resultado
+
+  	constructor(private restaurantsService: RestourantsService, // injeta o serviso restaurants
+              	private route: ActivatedRoute) { }
+
+  	ngOnInit() {
+    		this.reviews = this.restaurantsService
+    		.reviewsOfRestaurant(this.route.parent.snapshot.params['id']) // tira uma foto da url
+								// pega o id passa para o reviewsOfRestaurant
+								// retorna os reviews
+  	}
+}
+
+

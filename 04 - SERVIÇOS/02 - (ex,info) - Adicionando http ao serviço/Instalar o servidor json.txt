@@ -1,0 +1,4 @@
+vá até a pasta raiz 
+	>> npm install -g json-server
+	>> json-server db.json
+

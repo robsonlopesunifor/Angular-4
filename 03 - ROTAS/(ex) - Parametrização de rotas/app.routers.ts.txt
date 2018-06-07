@@ -1,0 +1,29 @@
+//	ROTAS FILHAS 
+
+import { Routes } from '@angular/router'
+
+import {HomeComponent} from './home/home.component'
+import { AboutComponent } from "app/about/about.component";
+import { RestourantsComponent } from "app/restourants/restourants.component";
+import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
+
+///////////////////////////////////////////////////////////////////
+import { MenuComponent } from "app/restaurant-detail/menu/menu.component";		// componentes filhos 
+import { ReviewsComponent } from "app/restaurant-detail/reviews/reviews.component";	// componentes filhos
+///////////////////////////////////////////////////////////////////
+
+export const ROUTES: Routes = [
+
+  {path: '', component: HomeComponent},
+  {path: 'about', component: AboutComponent},
+  {path: 'restourants', component: RestourantsComponent},
+  {path: 'restourants/:id', component: RestaurantDetailComponent,
+///////////////////////////////////////////////////////////////////
+    	children: [							// ira carregar a partir dessa rota 
+      		{path: '  ', redirectTo: 'menu', pathMatch: 'full'},	// se o valor for vazio redireciona para menu
+      		{path: 'menu', component: MenuComponent},		// restaurant/menu
+      		{path: 'reviews', component: ReviewsComponent}		// restaurant/reviews
+    ]}
+///////////////////////////////////////////////////////////////////
+
+]

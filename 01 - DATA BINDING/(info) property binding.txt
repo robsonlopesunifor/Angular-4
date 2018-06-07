@@ -1,0 +1,25 @@
+DATA BINDING
+
+property binding: passar informações da classe do componente para 
+		  alguma propriedade de tag do template.
+
+		
+
+	<img [src]="foto">
+
+
+EX:
+--------------------------------------  
+	app.component.ts >>
+
+		caminhoFoto: string = "C://///img.png";
+
+
+	app.component.html >> 
+
+		<div>
+			<img [src]="caminhoFoto: ">
+		</div>
+
+
+	 

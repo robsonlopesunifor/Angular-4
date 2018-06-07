@@ -1,0 +1,32 @@
+DIRETIVAS:   As diretivas são uma forma de interação com o template.
+
+Diretivas de atributos: Ele modifica o conteúdo do elemento que está na tela, 
+			porém não retira nem adiciona nada na estrutura do HTML.
+
+import { NgStyle } from '@angular/common';
+
+*ngClass *ngStyle
+
+-------------------------------- *ngClass ------------------------------
+
+<p [cor-fundo]="true" [cor-letra]="false"> </p>
+
+------------------------------------------------------------
+<p [ngClass]="{	'cor-fundo': true, 'cor-letra': false }" > </p>
+
+----------------------------------- ngStyle ----------------------------
+
+<p [style.font-size] = "30 + 'px'"  > </p>
+<p [style.font-size] = "valorFonte" > </p>
+<p [style.color]="validaCor ? 'red' : 'blue'"> </p>
+
+-----------------------------------------------------------
+<p [ngStyle]="{
+		'font-size': 30px,
+		'font-size': valorFonte,
+		'color': (validaCor ? 'red' : 'blue')
+		}" 
+> </p>
+
+
+

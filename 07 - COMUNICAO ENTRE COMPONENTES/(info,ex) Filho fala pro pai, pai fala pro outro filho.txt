@@ -1,0 +1,13 @@
+//	filho passa para o pai, pai passa para o outro filho
+
+// #shoppingCart e uma variavel de templete que acessa o component
+// depos acessamos os metodos do componet 
+// ex: shoppingCart.addItem($event)
+
+ 	<mt-menu>
+		<mt-menu-item (add)="shoppingCart.addItem($event)" ></mt-menu-item>
+	
+  		<mt-shopping-cart #shoppingCart ></mt-shopping-cart>
+	</mt-menu>
+
+

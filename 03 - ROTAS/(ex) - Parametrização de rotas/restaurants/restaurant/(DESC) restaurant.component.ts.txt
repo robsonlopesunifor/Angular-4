@@ -1,0 +1,28 @@
+// NAO A MUDANÇA : ESSO PARA EU SABER COM O QUE ELE TA MANIPULANDO
+// Esse component so vai quardar dados do Model  restourant (OBS: model sem 's')
+
+import { Component, OnInit, Input } from '@angular/core';
+import { Restourant } from "app/restourants/restourant/restourant.model";
+
+@Component({
+  selector: 'mt-restourant',
+  templateUrl: './restourant.component.html'
+})
+export class RestourantComponent implements OnInit {
+  
+  @Input() restourant: Restourant[]  	//precisa do input para o component 
+					//pai passar dados para esse component.
+					//Vai armazenar os dados do Model restaurant
+					//que sera usado no HTML.
+					//E o model restourant nao o restourants
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+}
+
+
+
+
+

@@ -1,0 +1,11 @@
+// estrutura de dados que armazena dados sobre o menu para popular o templete
+
+export interface MenuItem {
+  id: string
+  name: string
+  description: string
+  price: number
+  imagePath: string
+}
+
+

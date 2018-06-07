@@ -1,0 +1,54 @@
+Programação reativa 
+Um evento acontece. E os que estão interessados são notificados e reagem a ele. 
+
+// OBJETO FOCO DO INTERESSE (ex: servidor )
+// Objeto interessado na mudança desse objeto ( os LISTENERS )
+// os LISTENERS se escreve esperando uma mudança (evento)
+// quando o evento acontece o listener executa uma ação 
+
+//-----------------------------------ESTRUTURA--------------------------------------------
+
+this.http.get(‘/url’).
+	.map( response => response.json() )		// Obj interessado 
+	.subscribe( data => this.mydata = data )	// Listener 
+
+// -------------------- unsubscribe -----------------------
+	unsubscribe para evitar memory leaks 
+
+		http, router e async não precisam de unsubscribe
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+//------------------------------------SERVIÇO---------------------------------------------
+// O service vai vai mandar uma requisição (get, post, put, delete, head, options) para o servidor
+// e ficar esperando a resposta 
+
+export class RestourantsService {
+			 
+  restourants():Observable<Restourant[]> {		
+    return this.http.get('http:localhost:3000/restaurants')    	// o http retorna um 
+							// observable do tipo Restourant 
+        .map(response => response.json())		// nos precisamos maper a resposta crua
+							// em um json
+  }
+}
+
+//-------------------------------------COMPONENTE---------------------------------------------
+// Se escreve no serviço pra ficar escultando 
+// Todos que se esqueverem receberam a resposta 
+
+export class RestourantsComponent implements OnInit {
+
+  restourants: Restourant[]
+
+  ngOnInit() {
+    
+    this.RestourantsService.restourants()
+      .subscribe(restaurants => this.restourants = restaurants)   // vai se inscrever e depois
+								  // vai ficar escutando 
+  }
+}
+
+
+

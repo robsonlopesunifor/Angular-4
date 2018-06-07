@@ -1,0 +1,58 @@
+// Serviço que retorna os restaurante (ou restaurantes) e seus dados 
+
+import { Injectable } from '@angular/core'
+import { Http } from "@angular/http";
+
+import {Observable} from 'rxjs/Observable'
+import 'rxjs/add/operator/map'
+// tratamento de erro
+import 'rxjs/add/operator/catch'
+//
+import { Restourant } from "app/restourants/restourant/restourants.model";
+import { MenuItem } from "app/restaurant-detail/menu-item/menu-item.model";
+
+import {MEAT_API} from '../app.api'
+// tratamento de erro
+import {ErrorHandler} from '../app.error-handler'
+
+@Injectable()
+export class RestourantsService {
+
+  constructor(private http: Http){}
+
+//-------------------- retorna todos os restaurantes ---------------------------
+
+  restourants():Observable<Restourant[]> {
+    return this.http.get(`${MEAT_API}/restaurants`)
+        .map(response => response.json())
+        .catch(ErrorHandler.handleError)
+  }
+
+//-------------------- retorna o restaurante pelo id do restaurante ------------
+
+  restourantsById(id: string): Observable<Restourant>{
+    return this.http.get(`${MEAT_API}/restaurants/${id}`)  // sem a barra voce chama todo mundo 
+							   // mas com a barra mais o id voce chama so um
+        .map(response => response.json())
+        .catch(ErrorHandler.handleError)
+  }
+
+//-------------------- retornar os reviews pelo id restaurante-------------------	
+	
+  reviewsOfRestaurant(id: string): Observable<any>{    		   // any pos não sabemos qual retornar
+    return this.http.get(`${MEAT_API}/restaurants/${id}/reviews`)  // retorna os reviews
+    .map(response => response.json())
+    .catch(ErrorHandler.handleError)
+  }
+ 
+//-------------------- retorna o menu pelo id restaurante-------------------------------
+
+  menuOfRestaurant(id: string): Observable<MenuItem[]>{
+    return this.http.get(`${MEAT_API}/restaurants/${id}/menu`)  // retorna o menu e preenche 
+								// a estrutura de dados meuItem
+    .map(response => response.json())
+    .catch(ErrorHandler.handleError)
+  }
+}
+
+

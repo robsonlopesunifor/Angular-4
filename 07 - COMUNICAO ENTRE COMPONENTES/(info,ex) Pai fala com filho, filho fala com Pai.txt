@@ -1,0 +1,55 @@
+// 	PAI se comunicanto com o FILHO - [menuItem]="item"
+// 	FILHO se colunicando como PAI  - (add)="addMenuItem($event)"
+//
+// 	<mt-menu>
+//		<mt-menu-item [menuItem]="item" (add)="addMenuItem($event)" >  </mt-menu-item>
+//				Input			Output
+//	</mt-menu>
+//
+////////////////////////////////////( FILHO )////////////////////////////////////
+//-----------------------------menu-item.componet.html---------------------------
+
+<div>
+	<a (click)="emitAddEvent()" class=""> Adicionar </a>
+</div>
+
+//-----------------------------menu-item.component.ts----------------------------
+
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { MenuItem } from './menu-item.model'
+
+export class MenuItemComponent implements OnInit { 
+
+  	@Input() menuItem: MenuItem 	   	// permite o pai se comunicar com o filho.
+  	@Output() add = new EventEmitter() 	// permite o filho se comunicar com o pai.
+
+  	emitAddEvent(){
+    		this.add.emit(this.menuItem)  	// ira comunicar ao pai qual item foi clicado
+				  		// e enviarar o model MenuItem
+  	}
+}
+
+
+//////////////////////////////////////( PAI )//////////////////////////////////////
+//-------------------------------menu.componet.html--------------------------------
+
+<!--INÍCIO DO MENU -->
+<div>
+    <mt-menu-item  
+    	[menuItem]="item" 			    // Atributo do componet menu-item,
+						    // permite passar dados para o menu-item.
+	(add)="addMenuItem($event)" >      	    // mostra os dados $event no console.
+    </mt-menu-item>
+</div>
+
+//--------------------------------menu.componet.ts----------------------------------
+
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable'
+
+export class MenuComponent implements OnInit {
+
+  addMenuItem(item: MenuItem){			   //
+    console.log(item)
+  }
+}

@@ -1,0 +1,34 @@
+DIRETIVAS: As diretivas são uma forma de interação com o template.
+
+Diretivas estruturais
+
+*ngFor , *ngIf , *ngSwitch
+
+------------------------------- ngFor ----------------------------------
+
+app.component.ts >>
+
+	pessoas: string [] = ['João', 'Maria', 'Angular 2'];
+
+lista-pessoa.component.html >>
+
+	<li *ngFor="let pessoa of pessoas"> 
+	{{pessoa}}
+	</li>
+
+------------------------------- ngif -------------------------------------
+
+<div *ngIf="true"     	    > texto </div>
+<div *ngIf="getValor()"     > texto  </div>
+<div *ngIf="getValor() > 0" > texto  </div>
+
+-------------------------------- ngSwitch --------------------------------
+
+<div [ngSwitch]="expressão condicional">
+	<p *ngSwitchCase="condição 1" >mostra conteúdo 1</p>
+	<p *ngSwitchCase="condição 2" >mostra conteúdo 2</p>
+	<p *ngSwitchCase="condição 3" >mostra conteúdo 3</p>
+	<p *ngSwitchCase="condição 4" >mostra conteúdo 4</p>
+	<p *ngSwitchDefault >mostra conteúdo padrão</p>
+</div>
+------------------------------------------------------------------------

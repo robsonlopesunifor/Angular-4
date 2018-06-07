@@ -1,0 +1,24 @@
+import { Component, OnInit } from '@angular/core';
+import { Restourant } from "app/restourants/restourant/restourants.model";
+import { RestourantsService } from "app/restourants/restaurants.service";
+
+@Component({
+  selector: 'mt-restourants',
+  templateUrl: './restourants.component.html'
+})
+export class RestourantsComponent implements OnInit {
+
+  restourants: Restourant[]
+
+  constructor(private RestourantsService: RestourantsService) { }
+
+  ngOnInit() {
+    
+    this.RestourantsService.restourants()
+      .subscribe(restaurants => this.restourants = restaurants)       	// vai se inscrever e depois
+								      	// vai ficar escutando a 
+								      	// chegada de um objeto observable
+  }
+}
+
+

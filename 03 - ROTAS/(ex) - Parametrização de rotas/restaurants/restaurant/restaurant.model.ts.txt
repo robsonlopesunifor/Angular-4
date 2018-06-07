@@ -1,0 +1,15 @@
+// NAO A MUDANÇA : ESSO PARA EU SABER COM O QUE ELE TA MANIPULANDO
+
+// estrutura de dados
+export interface Restourant {
+
+  id: string
+  name: string
+  category: string
+  deliveryEstimate: string
+  rating: number
+  imagePath: string
+
+}
+
+

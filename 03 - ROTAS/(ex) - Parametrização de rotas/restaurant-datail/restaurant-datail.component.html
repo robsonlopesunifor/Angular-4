@@ -1,0 +1,78 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IRA CARREGAR OS DADOS ARMAZENADOS NO COMPONENT
+// PARA O HTML 
+
+//aqui vamos passar os dados do restourant para a pagina 
+ {{restourant?.name}}   // vamos colocar ? pois antes do valor carregar ele e não definido
+  // e pode dar erro 
+//-------------------------------------------------------------------------------------------------------
+[routerLink]="['reviews']"  		// nao coloque barra pos e uma rota relativa
+//------------------------------------------------------------------------------------------------------
+routerLinkActive="detail-active"  	// deixa ativo o elemento atual 
+//-------------------------------------------------------------------------------------------------------
+   <router-outlet></router-outlet>  	// var carregar o conteúdo
+// o interessante e que ele já está dentro de outro 
+// router-outlet 
+//--------------------------------------------------------------------------------------------------------
+<div class="col-sm-3 col-xs-12" *ngIf="restourant">    //  mesmo restourant?.imagePath
+							   // esteja correto correto 
+   // a imagem pode nao existe 
+    <img class="box-img-detail" [src]="restourant?.imagePath" />
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+      <!-- INÍCIO DO CONTEÚDO -->
+      <section class="content-header">
+        <h1>
+
+        </h1>
+      </section>
+
+
+      <section class="content">
+
+        <div class="row">
+            <div class="col-xs-12">
+              <div class="box box-solid">
+                <div class="box-header with-border">
+                  <i class="fa fa-home"></i>
+
+                  <h3 class="box-title">{{restourant?.name}}</h3><span class="pull-right"><i class="fa fa-star"></i> {{restourant?.rating}}</span>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                  <div class="col-sm-3 col-xs-12" *ngIf="restourant">
+                    <img class="box-img-detail" [src]="restourant?.imagePath" />
+                  </div>
+
+                  <dl class="col-sm-9 col-xs-12">
+                    <dt>Categoria</dt>
+                    <dd>{{restourant?.category}}</dd>
+                    <dt>Quem somos</dt>
+                    <dd>{{restourant?.about}}</dd>
+                    <dt>Horários</dt>
+                    <dd>{{restourant?.hours}}</dd>
+                  </dl>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer detail-footer">
+                <a class="pull-left detail-active" routerLinkActive="detail-active" [routerLink]="['menu']" >
+                   Menu
+                </a>
+                <a class="pull-right" routerLinkActive="detail-active" [routerLink]="['reviews']" >
+                   Avaliações
+                </a>
+              </div>
+              </div>
+            </div>
+            <!-- /.col-xs-12 -->
+
+        </div>
+
+
+        <div class="row">
+          <router-outlet></router-outlet>
+        </div>
+
+      </section>
+      <!-- FIM DO CONTEÚDO -->
+
+

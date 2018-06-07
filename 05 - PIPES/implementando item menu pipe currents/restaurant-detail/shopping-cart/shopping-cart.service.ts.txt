@@ -1,0 +1,40 @@
+import { CartItem } from "app/restaurant-detail/shopping-cart/cart-item.model";
+import { MenuItem } from "app/restaurant-detail/menu-item/menu-item.model";
+
+
+export class ShoppingCartService {
+  items: CartItem[] = []      // sao os produtos que voce vai guardar no carrinho
+                              // ficara armazenado em memoria 
+
+  clear(){                    // limpa o carrinho 
+      this.items = []
+  }
+
+  addItem(item:MenuItem){   // adicionar no carrinho 
+                            // vai adicionar o MenuItem
+    			    // vai procurar no arrey items (nomea o array com mItem) 
+    			    // se o id do array e igual ao id do item adicionado 
+    let foundItem = this.items.find((mItem) => mItem.menuItem.id === item.id )
+    if(foundItem){
+      		// caso exista adicione mais 1
+      		foundItem.quantity = foundItem.quantity + 1
+    }else{
+      		// se voce nao encontrar, de um new CartItem() com o item e adicione ao array
+      		this.items.push(new CartItem(item))
+    }
+  }
+
+  removeItem(item:CartItem){    // remover do carrinho 
+                                // item do tipo CartItem 
+    	this.items.splice(this.items.indexOf(item),1)
+  }
+
+  total(): number{    // retorna o total do custo 
+    return this.items
+    .map(item => item.value()) 		    // mapeia o CartItem para seu valor
+    .reduce((prev, value) => prev+value, 0) // soma o valor anterior mais o atual
+                                            // o 0 define o valor inicial 
+  }
+}
+
+

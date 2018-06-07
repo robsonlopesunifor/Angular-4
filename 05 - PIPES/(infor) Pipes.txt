@@ -1,0 +1,40 @@
+Transforma dados para uma apresentação diferente 
+
+	user: = {name: ‘Luke Skywalker’,isJedi: true} // JSON
+
+<div>{{ user | json }}</div>  	// <div> { name: ‘Luke Skywalker’ , isJedi: true } </div> 
+<div> {{ ‘Luke Skywalker’  | uppercase }}</div>		// 	LUKE SKYWALKER
+<div> {{ ‘Luke Skywalker’  | lowercase  }}</div>	//	luke skywalker
+<div> {{ 0.5  | percent  }}</div>			// 	50%
+<div> {{ user.idade | date: ‘dd/MM/yyyy’  }}</div>	//	12/12/1994
+<div >{{ dinheiro | currency }} </div>			//	USD45.90 
+<div >{{ dinheiro | currency: ‘BRL’: true }} </div>	//	R$45.90
+<div >{{ user.name | slice: 0:4 }}</div>  		// 	lukeskywall >> luke
+
+///////////////////Combinação de Pipes///////////////////////////////////////////////////////////
+
+<div>{{ [‘one’,’two’] | slice: 0:1 | json | uppercase }}</div>     //  [‘one’]   //   [‘one’]   //   [“ONE”]
+
+///////////////////{{  | async }}////////////////////////////////////////////////////////////////
+// Ele que faz o subcribe
+
+<div *ngFor="let review of reviews | async" > 
+
+//------------------------------------------------------------------------------------------------
+
+export class ReviewsComponent implements OnInit {
+
+  reviews: Observable<any>   // resultado
+
+  constructor(private restaurantsService: RestourantsService,
+              private route: ActivatedRoute) { }
+
+
+   ngOnInit() {
+    	this.reviews = this.restaurantsService
+    	.reviewsOfRestaurant(this.route.parent.snapshot.params['id']) // Nao precisa do subscribe
+								      // por conta do async
+   }
+}
+
+

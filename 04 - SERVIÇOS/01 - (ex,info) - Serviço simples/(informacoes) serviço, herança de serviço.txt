@@ -1,0 +1,28 @@
+Serviços serve para encapsular o acesso a api de backend
+
+// ---------------------- 3 escopos -----------------------------------------------
+
+// todos têm acesso 		 //  providers[ ] do modolo raiz	
+// componente e seus filhos      //  providers[ ] do componete
+// somente o componente 	 //  viewProviders[ ] do componete
+
+//----------------------- Serviço herdando outros serviço --------------------------
+
+import { Injectable } from ‘@angular/core’
+import { Http } from ‘@angular/http’
+
+@Injectable()  				  // injeta serviço em serviço    
+export classMyService {
+	construtor(private http: Http) {} // injeta serviço em serviço 
+
+	List() {
+		return this.http.get(‘/url’)
+	}
+}
+
+// ----------------------- Serviços que podem ser injetados (herdados) --------------
+
+TITLE 			serviço que altera o título 
+HTTP			serviço que faz requisições http
+ROUTER 			serviço que trabalha com rotas
+

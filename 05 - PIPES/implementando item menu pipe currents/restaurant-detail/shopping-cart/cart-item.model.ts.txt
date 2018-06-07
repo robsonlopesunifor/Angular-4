@@ -1,0 +1,12 @@
+import { MenuItem } from "app/restaurant-detail/menu-item/menu-item.model";
+
+export class CartItem {   // essa estrutura de dados vai ter o menuItem e a quantidade 
+                          // todas publicas para podermos acessar, e saber se esta vazia
+
+  constructor(public menuItem: MenuItem,
+                     public quantity: number = 1){}
+
+  value(): number {       // vai ter um metodo que retorna o total (preco * quantidade)
+    return this.menuItem.price * this.quantity
+  }
+}

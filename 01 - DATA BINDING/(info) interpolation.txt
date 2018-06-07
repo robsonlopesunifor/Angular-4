@@ -1,0 +1,37 @@
+DATA BINDING
+
+interpolation : transporte componente para template.
+		
+
+	{{variável}}
+
+
+EX:
+-------------------------------------- com variavel 
+	app.component.ts >> 
+
+		title = ‘Ola mundo’
+
+	app.component.html >> 
+
+
+		<h1>
+			{{title}}
+		</h1>
+
+-------------------------------------- com metodo 
+	app.component.ts >>
+
+		getLivro(): string {
+			return 'Angular 2';
+		}
+
+	app.component.html >> 
+
+
+		<h1>
+			{{getLivro()}}
+		</h1>
+---------------------------------------
+
+	 

@@ -1,0 +1,25 @@
+DATA BINDING
+
+Event binding: template para a classe do componente.
+		
+
+	<div (evento)="metodo()" ></div>
+
+
+EX:
+-------------------------------------- com variavel 
+	
+
+	app.component.ts >>
+
+		msgAlerta(): void {
+			alert('Livro Angular 2');
+		}
+
+	app.component.html >>  
+
+
+		<button (click)="msgAlerta()">Enviar Alerta</button>
+
+
+		
